@@ -1,0 +1,53 @@
+﻿@implements IDisposable
+@if (AllState.ShowAlert.HasValue)
+{
+    <div class="alert cus-pending alert-dismissible fade show @(AllState.ShowAlert==false ? "cus-alertcolor":"")" role="alert">
+
+
+        @AllState.message
+        @{
+            int x = 1;
+        }
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" @onclick="CloseAlert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+@code {
+     
+
+
+
+    private void CloseAlert()
+    {
+        // Close the alert by invoking the callback
+        AllState.TriggerAlert(null,"");
+    }
+    protected override void OnInitialized()
+    {
+        
+
+        AllState.Action += StateHasChanged;
+      
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        /* // If Checker has a value, show the alert
+         if (Checker.HasValue && Checker.Value)
+         {
+
+             // Delay for 2 seconds before closing the alert
+             await Task.Delay(2000);
+
+             //Close the alert after the delay
+             CloseAlert();
+         }*/
+    }
+    
+    }

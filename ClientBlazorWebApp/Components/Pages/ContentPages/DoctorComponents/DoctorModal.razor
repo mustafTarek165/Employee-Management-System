@@ -1,0 +1,95 @@
+﻿@if(ShowHealth)
+{
+<div class="container" style="margin-top:20px">
+<div class="row">
+    <div class="col-lg-12">
+         <div class="container-fluid">
+             
+         <EditForm Model="doctor" Enhance OnValidSubmit="SubmitCardDetails"class="row g-3">
+                                        <DataAnnotationsValidator />
+                                            <AlertComponent  />   
+                                            
+                                                <div class="card-container">
+                                                   <DoctorInformationComponent  doctor1="doctor"/>
+                                                </div>
+                                                  
+                                        <button type="submit" class="btn btn-primary col-5 ">@Title Issue</button>
+                                    </EditForm> 
+         </div>
+    </div>
+</div>
+</div>    
+}
+
+
+
+
+                                                   
+
+@code
+{
+    [Parameter]
+    public Doctor doctor { get; set; } = new();
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    public List<Doctor> doctors { get; set; } = new();
+
+    [Parameter] public bool ShowHealth{ get; set; }
+
+    [Parameter]
+    public EventCallback<List<Doctor>>OnLoadingNewDoctors{ get; set; }
+    bool successCheck;
+    string? message;
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetDoctors();
+
+
+    }
+    private async Task GetDoctors()
+    {
+       doctors= await doctorService.GetAll(Constants.DoctorBaseUrl);
+    }
+    
+    public  async Task SubmitCardDetails()
+    {
+
+        if(doctor.Id>0)
+        {
+            var result =await  doctorService.Update(doctor, Constants.DoctorBaseUrl);
+            successCheck =result.Flag;
+          
+            if (successCheck) message = "Department Updated Successfully";
+
+            message = result.Message;
+
+            await GetDoctors();
+            await OnLoadingNewDoctors.InvokeAsync(doctors);
+        }
+        else
+        {
+            var result =await  doctorService.Insert(doctor, Constants.DoctorBaseUrl);
+            successCheck = result.Flag;
+            if (successCheck) message = "A new Health Added Successfully";
+            message =result.Message;
+            await GetDoctors();
+            await OnLoadingNewDoctors.InvokeAsync(doctors);
+
+        }
+
+
+        AllState.TriggerAlert(successCheck,message);
+
+        if((bool)successCheck)
+        {
+
+            doctor = new();
+            Title = "Add";
+        }
+
+    }
+}

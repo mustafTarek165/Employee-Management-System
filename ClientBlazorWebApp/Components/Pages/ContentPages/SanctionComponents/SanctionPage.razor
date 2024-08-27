@@ -1,0 +1,128 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowSanction)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                   
+                    <div class="card-header">
+                        <h4 class="float-start"> Sanction</h4>
+
+                       
+
+                        <SanctionModal Sanction="Sanction" OnLoadingNewSanctions="LoadNewSanctions" Title="@Title" SanctionCheck="SanctionCheck"/>
+                 
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                     
+                                        <th scope="col">Employee Id </th>
+                                        <th scope="col">Sanction Type</th>
+                                         <th scope="col">Punishment</th>
+
+                                          <th scope="col">Punishment Date</th>
+
+                                           <th scope="col">Date</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(Sanctions is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in Sanctions)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                             
+                                                <td>@item.EmployeeId</td>
+                                                <td>@item.SanctionType.Name</td>
+                                                
+                                                <td>@item.Punishment</td>
+                                                <td>@item.PunishmentDate</td>
+                                                <td>@item.Date</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No Sanctions added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<Sanction> Sanctions { get; set; } = new();
+    public Sanction Sanction { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetSanctions();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetSanctions()
+    {
+        Sanctions = await sanctionService.GetAll(Constants.SanctionBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private bool SanctionCheck{ get; set; }
+    private void EditClicked(Sanction sanction)
+    {
+        Sanction=sanction;
+        Title = "Update";
+        SanctionCheck = true;
+    }
+    private async Task DeleteClicked(Sanction Sanction)
+    {
+        var response = await sanctionService.DeleteById(Sanction.Id, Constants.SanctionBaseUrl);
+        await GetSanctions();
+        AllState.TriggerAlert(true,"Sanction Deleted Successfully");
+    }
+    void LoadNewSanctions(List<Sanction>sanctions)
+    {
+        Sanctions = sanctions;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        Sanction = new();
+        Title = "Add";
+    }
+}

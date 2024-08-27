@@ -1,0 +1,35 @@
+﻿
+<div>
+  
+    <div class="form-group">
+         <label for="UserSelect">User:</label>
+         <select id="UserSelect" class="form-control" @bind="User1.Role" style="width: auto;">
+             <option value="">Select Role</option>
+             @if(SystemRoles is not null)
+                 {
+                      @foreach (var User in SystemRoles)
+             {
+                 <option value="@User.Id">@User.Name</option>
+             }
+                 }
+                
+         </select>
+    </div>
+
+</div>
+
+
+
+@code {
+
+    public List<SystemRole> SystemRoles = new()
+    {
+        new SystemRole{Id=1,Name="Admin"},
+        new SystemRole{Id=2,Name="User"}
+    };
+
+    [Parameter]
+    public ManageUser User1 { get; set; } 
+
+
+}

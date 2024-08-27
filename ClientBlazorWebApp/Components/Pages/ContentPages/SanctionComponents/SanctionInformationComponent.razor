@@ -1,0 +1,54 @@
+﻿
+<div>
+    <label for="Fn" class="form-label">Employee Id</label>
+    <input id="Fn" @bind="Sanction1!.EmployeeId" class="form-control"  disabled/>
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => Sanction1!.EmployeeId)" class="field-validation-error" />
+    </div>
+
+     <label for="S" class="form-label">Punishment</label>
+    <InputText id="S" @bind-Value="Sanction1!.Punishment" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => Sanction1!.Punishment)" class="field-validation-error" />
+    </div>
+
+     <label for="F" class="form-label"> Punishment Date </label>
+    <InputDate id="F" @bind-Value="Sanction1!.PunishmentDate" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => Sanction1!.PunishmentDate)" class="field-validation-error" />
+    </div>
+
+     <label for="S" class="form-label">Date</label>
+    <InputDate id="S" @bind-Value="Sanction1!.Date" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => Sanction1!.Date)" class="field-validation-error" />
+    </div>
+
+    <div class="form-group">
+         <label for="SanctionSelect">Sanction:</label>
+         <select id="SanctionSelect" class="form-control" @bind="Sanction1.SanctionTypeId" style="width: auto;" >
+             <option value="">Select a Sanction</option>
+             @if(SanctionTypes is not null)
+                 {
+                      @foreach (var Sanction in SanctionTypes)
+             {
+                 <option value="@Sanction.Id">@Sanction.Name</option>
+             }
+                 }
+                
+         </select>
+    </div>
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public List<SanctionType> SanctionTypes { get; set; } = new();
+
+    [Parameter]
+    public Sanction Sanction1 { get; set; } = new();
+
+  
+}

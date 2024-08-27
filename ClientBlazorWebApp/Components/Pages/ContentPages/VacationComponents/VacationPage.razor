@@ -1,0 +1,128 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowVacation)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                   
+                    <div class="card-header">
+                        <h4 class="float-start"> Vacation</h4>
+
+                       
+
+                        <VacationModal Vacation="Vacation" OnLoadingNewVacations="LoadNewVacations" Title="@Title" VacationCheck="VacationCheck"/>
+                 
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                     
+                                        <th scope="col">Employee Id </th>
+                                        <th scope="col">Vacation Type</th>
+                                         <th scope="col">Start Date</th>
+
+                                          <th scope="col">End Date</th>
+
+                                           <th scope="col">Number Of Days</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(Vacations is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in Vacations)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                             
+                                                <td>@item.EmployeeId</td>
+                                                <td>@item.VacationType.Name</td>
+                                                
+                                                <td>@item.StartDate</td>
+                                                <td>@item.EndDate</td>
+                                                <td>@item.NumberOfDays</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No General Vacations added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<Vacation> Vacations { get; set; } = new();
+    public Vacation Vacation { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetVacations();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetVacations()
+    {
+        Vacations = await vacationService.GetAll(Constants.VacationBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private bool VacationCheck{ get; set; }
+    private void EditClicked(Vacation vacation)
+    {
+        Vacation=vacation;
+        Title = "Update";
+        VacationCheck = true;
+    }
+    private async Task DeleteClicked(Vacation Vacation)
+    {
+        var response = await vacationService.DeleteById(Vacation.Id, Constants.VacationBaseUrl);
+        await GetVacations();
+        AllState.TriggerAlert(true,"Vacation Deleted Successfully");
+    }
+    void LoadNewVacations(List<Vacation>vacations)
+    {
+        Vacations = vacations;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        Vacation = new();
+        Title = "Add";
+    }
+}

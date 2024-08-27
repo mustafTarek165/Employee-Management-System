@@ -1,0 +1,123 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowCity)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                   
+                    <div class="card-header">
+                        <h4 class="float-start"> City</h4>
+
+                       
+
+                        <div class=" float-end" >
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @onclick="ResetAll">
+                                Add New City
+                            </button>
+                            
+                        </div>
+                        <CityModal City="City" OnLoadingNewCities="LoadNewCities" Title="@Title"/>
+                 
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                       
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Country </th>
+                                        <th scope="col">City </th>
+                                        <th scope="col"> Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(Cities is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in Cities)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                           
+                                                <td>@item.Country?.Name</td>
+                                                <td>@item.Name</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No Cities added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<City> Cities { get; set; } = new();
+    public City City { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetCities();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetCities()
+    {
+        Cities = await cityService.GetAll(Constants.CityBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private void EditClicked(City city)
+    {
+        City=city;
+        Title = "Update";
+    }
+    private async Task DeleteClicked(City city)
+    {
+        var response = await cityService.DeleteById(city.Id, Constants.CityBaseUrl);
+        await GetCities();
+        AllState.TriggerAlert(true,"City Deleted Successfully");
+    }
+    void LoadNewCities(List<City>_cities)
+    {
+        Cities = _cities;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        City = new();
+        Title = "Add";
+    }
+}

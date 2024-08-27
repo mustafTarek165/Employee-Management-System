@@ -1,0 +1,20 @@
+﻿
+<div>
+    <label for="Fn" class="form-label"> Overtime Type</label>
+    <InputText id="Fn" @bind-Value="overtimeType!.Name" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => overtimeType!.Name)" class="field-validation-error" />
+    </div>
+
+</div>
+
+
+
+@code {
+    
+    [Parameter]
+    public OvertimeType? overtimeType { get; set; } = new();
+
+    
+
+}

@@ -1,0 +1,118 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowVacationType)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                   
+                    <div class="card-header">
+                        <h4 class="float-start"> Vacation Type</h4>
+
+                       
+
+                        <div class=" float-end" >
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @onclick="ResetAll">
+                                Add Vacation Type
+                            </button>
+                            
+                        </div>
+
+                        <VacationTypeModal VacationType="VacationType" OnLoadingNewVacationTypes="LoadNewVacationTypes" Title="@Title"/>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                      <th scope="col">Vacation Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(VacationTypes is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in VacationTypes)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                                <td>@item.Name</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No Vacation Types added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<VacationType> VacationTypes { get; set; } = new();
+    public VacationType VacationType { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetVacationTypes();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetVacationTypes()
+    {
+        VacationTypes = await vacationTypeService.GetAll(Constants.VacationTypeBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private void EditClicked(VacationType _VacationType)
+    {
+        VacationType = _VacationType;
+        Title = "Update";
+    }
+    private async Task DeleteClicked(VacationType _VacationType)
+    {
+        var response = await vacationTypeService.DeleteById(_VacationType.Id, Constants.VacationTypeBaseUrl);
+        await GetVacationTypes();
+        AllState.TriggerAlert(true,"Overtime Type Deleted Successfully");
+    }
+    void LoadNewVacationTypes(List<VacationType>_VacationTypes)
+    {
+        VacationTypes = _VacationTypes;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        VacationType = new();
+        Title = "Add";
+    }
+}

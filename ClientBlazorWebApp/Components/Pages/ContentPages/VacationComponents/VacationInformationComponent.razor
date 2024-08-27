@@ -1,0 +1,56 @@
+﻿
+<div>
+    <label for="S" class="form-label">Employee Id</label>
+    <input id="S" value="@Vacation1!.EmployeeId" class="form-control"  disabled/>
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => Vacation1!.EmployeeId)" class="field-validation-error" />
+    </div>
+    
+    
+    <label for="Fn" class="form-label">Start Date</label>
+    <InputDate id="Fn" @bind-Value="Vacation1!.StartDate" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => Vacation1!.StartDate)" class="field-validation-error" />
+    </div>
+
+  
+     <label for="F" class="form-label">Number Of Days</label>
+    <InputNumber id="F" @bind-Value="Vacation1!.NumberOfDays" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => Vacation1!.NumberOfDays)" class="field-validation-error" />
+    </div>
+
+     <label for="S" class="form-label">End Date</label>
+    <input id="S" value="@Vacation1!.EndDate" class="form-control" disabled/>
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => Vacation1!.EndDate)" class="field-validation-error" />
+    </div>
+
+    <div class="form-group">
+         <label for="VacationSelect">Vacation:</label>
+         <select id="VacationSelect" class="form-control" @bind="Vacation1.VacationTypeId" style="width: auto;" >
+             <option value="">Select a Vacation</option>
+             @if(VacationTypes is not null)
+                 {
+                      @foreach (var Vacation in VacationTypes)
+             {
+                 <option value="@Vacation.Id">@Vacation.Name</option>
+             }
+                 }
+                
+         </select>
+    </div>
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public List<VacationType> VacationTypes { get; set; } = new();
+
+    [Parameter]
+    public Vacation Vacation1 { get; set; } = new();
+
+  
+}

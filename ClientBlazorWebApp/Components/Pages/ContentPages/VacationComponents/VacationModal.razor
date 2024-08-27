@@ -1,0 +1,94 @@
+﻿@if(VacationCheck)
+{
+    <div class="container" style="margin-top:20px">
+<div class="row">
+    <div class="col-lg-12">
+         <div class="container-fluid">
+ <EditForm Model="Vacation" Enhance OnValidSubmit="SubmitCardDetails"class="row g-3">
+                                        <DataAnnotationsValidator />
+                                            <AlertComponent  />   
+                                            
+                                                <div class="card-container">
+                                                   <VacationInformationComponent VacationTypes="VacationTypes" Vacation1="Vacation"/>
+                                                </div>
+                                                  
+                                        <button type="submit" class="btn btn-primary col-5 ">@Title Vacation</button>
+                                    </EditForm>                                   
+         </div>
+    </div>
+</div>
+</div>   
+}
+
+@code
+{
+    [Parameter]
+    public Vacation Vacation { get; set; } = new();
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    public List<Vacation> Vacations { get; set; } = new();
+    public List<VacationType> VacationTypes { get; set; } = new();
+    [Parameter]
+    public EventCallback<List<Vacation>>OnLoadingNewVacations{ get; set; }
+
+        [Parameter]
+    public bool VacationCheck{ get; set; }
+
+    bool successCheck;
+    string? message;
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetVacationTypes();
+
+
+    }
+    private async Task GetVacationTypes()
+    {
+        VacationTypes = await vacationTypeService.GetAll(Constants.VacationTypeBaseUrl);
+    }
+    private async Task GetVacations()
+    {
+        Vacations = await vacationService.GetAll(Constants.VacationBaseUrl);
+    }
+    public  async Task SubmitCardDetails()
+    {
+
+        if(Vacation.Id>0)
+        {
+            var result =await  vacationService.Update(Vacation, Constants.VacationBaseUrl);
+            successCheck =result.Flag;
+          
+            if (successCheck) message = "Vacation Updated Successfully";
+
+            message = result.Message;
+
+            await GetVacations();
+            await OnLoadingNewVacations.InvokeAsync(Vacations);
+        }
+        else
+        {
+            var result =await  vacationService.Insert(Vacation, Constants.VacationBaseUrl);
+            successCheck = result.Flag;
+            if (successCheck) message = "A new Vacation Added Successfully";
+            message =result.Message;
+            await GetVacations();
+            await OnLoadingNewVacations.InvokeAsync(Vacations);
+
+        }
+
+
+        AllState.TriggerAlert(successCheck,message);
+
+        if((bool)successCheck)
+        {
+
+            Vacation = new();
+            Title = "Add";
+        }
+
+    }
+}

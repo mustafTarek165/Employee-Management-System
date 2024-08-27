@@ -1,0 +1,24 @@
+﻿<div class="card border-success">
+    <div class="card-body">
+        <div class="form-group">
+            <label class="form-label">Employee ID</label>
+            <input  @bind="doctor1.EmployeeId" disabled class="form-control"></input>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Date</label>
+            <InputDate @bind-Value="doctor1.Date" class="form-control"></InputDate>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Medical Diagnose</label>
+            <InputTextArea @bind-Value="doctor1.MedicalDiagnose" class="form-control"></InputTextArea>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Recommendation</label>
+            <InputTextArea @bind-Value="doctor1.MedicalRecommendation" class="form-control"></InputTextArea>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Doctor doctor1 { get; set; } = new();
+}

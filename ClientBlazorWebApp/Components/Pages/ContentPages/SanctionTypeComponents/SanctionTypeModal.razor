@@ -1,0 +1,92 @@
+﻿
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h5 class="modal-title" id="exampleModalLabel">@Title Sanction Type</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close" ></button>
+            </div>
+        
+            <div class="modal-body">
+               
+                <div style="padding: 1rem 0px;">
+                    <div class="card-content">
+                        
+                           
+                                    <EditForm Model="SanctionType" Enhance OnValidSubmit="SubmitCardDetails"class="row g-3">
+                                        <DataAnnotationsValidator />
+                                            <AlertComponent  />   
+                                            
+                                                <div class="card-container">
+                                                     <SanctionTypeInformationComponent  SanctionType="SanctionType"/>
+                                                </div>
+                                                  
+                                        <button type="submit" class="btn btn-primary col-5 ">@Title Sanction Type</button>
+                                    </EditForm>
+                                   
+                                             
+                                              
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@code
+{
+    [Parameter]
+    public SanctionType SanctionType { get; set; } = new();
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+    [Parameter]
+    public EventCallback<List<SanctionType>>OnLoadingNewSanctionTypes{ get; set; }
+
+        public List<SanctionType> SanctionTypes { get; set; } = new();
+    bool successCheck;
+    string? message;
+     private async Task GetSanctionTypes()
+    {
+        SanctionTypes = await sanctionTypeService.GetAll(Constants.SanctionTypeBaseUrl);
+    }
+    public  async Task SubmitCardDetails()
+    {
+
+
+        if(SanctionType.Id>0)
+        {
+            var result =await  sanctionTypeService.Update(SanctionType, Constants.SanctionTypeBaseUrl);
+            successCheck =result.Flag;
+
+            if (successCheck) message = "Overtime Type Updated Successfully";
+
+            message = result.Message;
+            await GetSanctionTypes();
+            await OnLoadingNewSanctionTypes.InvokeAsync(SanctionTypes);
+        }
+        else
+        {
+            var result =await  sanctionTypeService.Insert(SanctionType, Constants.SanctionTypeBaseUrl);
+            successCheck = result.Flag;
+            if (successCheck) message = "Overtime Type Added Successfully";
+            message =result.Message;
+            await GetSanctionTypes();
+            await OnLoadingNewSanctionTypes.InvokeAsync(SanctionTypes);
+        }
+
+        AllState.TriggerAlert(successCheck,message);
+
+
+        if((bool)successCheck)
+        {
+
+            SanctionType = new();
+          
+        }
+
+    }
+}

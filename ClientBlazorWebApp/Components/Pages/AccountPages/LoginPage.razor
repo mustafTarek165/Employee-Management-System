@@ -1,0 +1,83 @@
+﻿@page "/identity/account/login"
+
+@layout AuthenticationLayout
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        
+        <div class="col-lg-4">
+            <EditForm  Model="User" Enhance OnValidSubmit="@HandleLogin"  >
+                <DataAnnotationsValidator/> 
+      
+                <div class="card bg-dark" style="opacity:0.9;margin-top:30%;border-radius:10px;color:white;font-weight:bold">
+                 <div class="card-header text-center fs-5 mb-2"> Login</div>
+                    <div class="card-body">
+                        <div class="form-group mt-3">
+                           <label class="form-label">Email</label>
+                           <InputText @bind-Value="@User.Email" class="form-control"></InputText>
+                        </div>
+                        <div class="form-group mt-3">
+                           <label class="form-label">Password</label>
+                           <InputText type="password" @bind-Value="User.Password" class="form-control"></InputText>
+                        </div>
+                            <div class="form-group mt-3">
+                            @if(ShowLoadingButton)
+                            {
+                                <ButtonLoadingSpinner/>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary float-end" type="submit" >Log In</button>
+                            }
+                        </div>
+                       
+                    </div>
+                    <div class="card-footer">
+                        <span class="text-center">
+                            Don't have account? | 
+                            <a class="btn-link" href="identity/account/register"> Sign Up</a>
+                        </span>
+                        <ValidationSummary/>
+                    </div>
+                </div>
+
+            </EditForm>
+        </div>
+                <div class="col-lg-4"></div>
+    </div>
+</div>
+@code
+{
+    public bool ShowLoadingButton { get; set; } = false;
+    public Login User  = new();
+
+
+  
+    protected async override Task OnInitializedAsync()
+    {
+        
+         var authState = await AuthenticationStateProvider
+          .GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity is not null && user.Identity!.IsAuthenticated)   NavManager.NavigateTo("/home/dashboard");
+       
+
+
+    }
+
+    async Task HandleLogin()
+    {
+        ShowLoadingButton = true;
+        var result = await accountService.SignInAsync(User);
+        if(result.Flag)
+        {
+            var customStateProvider = (CustomAuthenticationStateProvider)AuthStateProvider;
+            await customStateProvider.UpdateAuthenticationState(new UserSession() { Token = result.Token, RefreshToken = result.RefreshToken });
+          
+            NavManager.NavigateTo("/home/dashboard");
+        }
+        ShowLoadingButton = false;
+    }
+}

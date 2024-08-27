@@ -1,0 +1,107 @@
+﻿
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h5 class="modal-title" id="exampleModalLabel">@Title Department</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close" ></button>
+            </div>
+        
+            <div class="modal-body">
+                
+                <div style="padding: 1rem 0px;">
+                    <div class="card-content">
+                        
+                           
+                                    <EditForm Model="department" Enhance OnValidSubmit="SubmitCardDetails"class="row g-3">
+                                        <DataAnnotationsValidator />
+                                            <AlertComponent  />   
+                                            
+                                                <div class="card-container">
+                                                   <DepartmentInformationComponent generalDepartments="generalDepartments" department1="department"/>
+                                                </div>
+                                                  
+                                        <button type="submit" class="btn btn-primary col-5 ">@Title Department</button>
+                                    </EditForm> 
+                                   
+                                             
+                                              
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@code
+{
+    [Parameter]
+    public Department department { get; set; } = new();
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    public List<Department> departments { get; set; } = new();
+    public List<GeneralDepartment> generalDepartments { get; set; } = new();
+    [Parameter]
+    public EventCallback<List<Department>>OnLoadingNewDepartments{ get; set; }
+    bool successCheck;
+    string? message;
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetGeneralDepartments();
+
+
+    }
+    private async Task GetGeneralDepartments()
+    {
+        generalDepartments = await generalDepartmentService.GetAll(Constants.GeneralDepartmentBaseUrl);
+    }
+    private async Task GetDepartments()
+    {
+        departments = await departmentService.GetAll(Constants.DepartmentBaseUrl);
+    }
+    public  async Task SubmitCardDetails()
+    {
+
+        if(department.Id>0)
+        {
+            var result =await  departmentService.Update(department, Constants.DepartmentBaseUrl);
+            successCheck =result.Flag;
+          
+            if (successCheck) message = "Department Updated Successfully";
+
+            message = result.Message;
+
+            await GetDepartments();
+            await OnLoadingNewDepartments.InvokeAsync(departments);
+        }
+        else
+        {
+            var result =await  departmentService.Insert(department, Constants.DepartmentBaseUrl);
+            successCheck = result.Flag;
+            if (successCheck) message = "A new Department Added Successfully";
+            message =result.Message;
+            await GetDepartments();
+            await OnLoadingNewDepartments.InvokeAsync(departments);
+
+        }
+
+
+        AllState.TriggerAlert(successCheck,message);
+
+        if((bool)successCheck)
+        {
+
+            department = new();
+            Title = "Add";
+        }
+
+    }
+}

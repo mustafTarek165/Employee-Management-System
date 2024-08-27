@@ -1,0 +1,118 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowCountry)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="card-header">
+                        <h4 class="float-start"> Country</h4>
+
+                       
+
+                        <div class=" float-end" >
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @onclick="ResetAll">
+                                Add Country
+                            </button>
+                            
+                        </div>
+
+                        <CountryModal Country="Country1" Title="@Title" OnLoadingNewCountries="LoadNewCountries" />
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                       
+                                        <th scope="col">Country</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(Countries is not null)
+                                    {
+                                        int count = 1;
+                                        foreach(var item in Countries)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                              
+                                                <td>@item.Name</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No Countries added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<Country> Countries { get; set; } = new();
+    public Country Country1 = new();
+    public string Title { get; set; } = "Add";
+    protected async override Task OnInitializedAsync()
+    {
+ await GetCountries();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetCountries()
+    {
+        Countries = await countryService.GetAll(Constants.CountryBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private void EditClicked(Country Country)
+    {
+        Title = "Update";
+        Country1 = Country;
+
+    }
+    private async Task DeleteClicked(Country Country)
+    {
+        var response = await countryService.DeleteById(Country.Id, Constants.CountryBaseUrl);
+          AllState.TriggerAlert(true,"General Department Deleted Successfully");
+        await GetCountries();
+    }
+     void LoadNewCountries(List<Country> _Countries)
+    {
+        Countries = _Countries;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        Country1 = new();
+        Title = "Add";
+    }
+
+}

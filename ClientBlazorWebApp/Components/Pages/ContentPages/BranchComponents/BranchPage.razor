@@ -1,0 +1,122 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowBranch)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                   
+                    <div class="card-header">
+                        <h4 class="float-start"> Branch</h4>
+
+                       
+
+                        <div class=" float-end" >
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @onclick="ResetAll">
+                                Add New branch
+                            </button>
+                            
+                        </div>
+
+                        <BranchModal   Branch="branch" Title="@Title" OnLoadingNewBranches="LoadNewBranches" />
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                     
+                                        <th scope="col">department</th>
+                                        <th scope="col">branch </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(branches is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in branches)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                              
+                                                <td>@item.Department.Name</td>
+                                                <td>@item.Name</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No  branches added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<Branch> branches { get; set; } = new();
+    public Branch branch { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await Getbranches();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task Getbranches()
+    {
+        branches = await branchService.GetAll(Constants.BranchBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private void EditClicked(Branch _branch)
+    {
+        branch=_branch;
+        Title = "Update";
+    }
+    private async Task DeleteClicked(Branch branch)
+    {
+        var response = await branchService.DeleteById(branch.Id, Constants.BranchBaseUrl);
+        await Getbranches();
+        AllState.TriggerAlert(true,"branch Deleted Successfully");
+    }
+    void LoadNewBranches(List<Branch>_branches)
+    {
+        branches = _branches;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        branch = new();
+        Title = "Add";
+    }
+}

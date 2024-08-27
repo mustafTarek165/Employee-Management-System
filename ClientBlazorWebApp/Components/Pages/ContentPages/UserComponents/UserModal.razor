@@ -1,0 +1,87 @@
+﻿
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h5 class="modal-title" id="exampleModalLabel"> ManageUser</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close" ></button>
+            </div>
+        
+            <div class="modal-body">
+             
+                <div style="padding: 1rem 0px;">
+                    <div class="card-content">
+                        
+                           
+                                    <EditForm Model="user" Enhance OnValidSubmit="SubmitCardDetails"class="row g-3">
+                                        <DataAnnotationsValidator />
+                                            <AlertComponent  />   
+                                            
+                                                <div class="card-container">
+                                                   <UserInformationComponent User1="user"/>
+                                                </div>
+                                                  
+                                        <button type="submit" class="btn btn-primary col-5 ">Change User Role</button>
+                                    </EditForm>
+                                   
+                                             
+                                              
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@code
+{
+    [Parameter]
+    public ManageUser user { get; set; } = new();
+   public List<ManageUser> Users { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<List<ManageUser>>OnLoadingNewUsers{ get; set; }
+    bool successCheck;
+    string? message;
+
+    protected async override Task OnInitializedAsync()
+    {
+
+     
+
+    }
+  
+    private async Task GetUsers()
+    {
+        Users = await accountService.GetUsers();
+    }
+    public  async Task SubmitCardDetails()
+    {
+
+        var result = await accountService.UpdateUser(user);
+        successCheck =result.Flag;
+          
+            if (successCheck) message = "User Role Updated Successfully";
+
+            message = result.Message;
+
+            await GetUsers();
+            await OnLoadingNewUsers.InvokeAsync(Users);
+       
+
+
+        AllState.TriggerAlert(successCheck,message);
+
+        if((bool)successCheck)
+        {
+
+            user = new();
+          
+        }
+
+    }
+}

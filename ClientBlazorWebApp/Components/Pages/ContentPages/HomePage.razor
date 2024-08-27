@@ -1,0 +1,47 @@
+﻿@page "/home/dashboard"
+ <CascadingAuthenticationState> 
+            <AuthorizeView >
+                <Authorized >
+
+
+    <TableBanner/>
+
+    <GeneralDepartmentPage />
+    <DepartmentPage />
+      <BranchPage/>
+
+      <CountryPage/>
+      <CityPage/>
+      <TownPage/>
+     
+    <UserPage />
+    <EmployeePage/>
+    <DoctorPage/>
+
+    <VacationPage/>
+    <SanctionPage/>
+    <OvertimePage/>
+
+
+    <VacationTypePage/>
+    <OvertimeTypePage/>
+    <SanctionTypePage/>
+  
+        </Authorized>
+    </AuthorizeView>
+</CascadingAuthenticationState>
+@code {
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider
+          .GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity is null || !user.Identity.IsAuthenticated) NavManager.NavigateTo("/identity/account/login");
+
+    }
+
+}

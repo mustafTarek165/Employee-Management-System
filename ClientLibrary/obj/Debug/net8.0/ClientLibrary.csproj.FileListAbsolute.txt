@@ -1,0 +1,15 @@
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\bin\Debug\net8.0\ClientLibrary.deps.json
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\bin\Debug\net8.0\ClientLibrary.dll
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\bin\Debug\net8.0\ClientLibrary.pdb
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\ClientLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\ClientLibrary.AssemblyInfoInputs.cache
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\ClientLibrary.AssemblyInfo.cs
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\ClientLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\ClientLibrary.dll
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\refint\ClientLibrary.dll
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\ClientLibrary.pdb
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\ref\ClientLibrary.dll
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\bin\Debug\net8.0\BaseLibrary.dll
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\bin\Debug\net8.0\BaseLibrary.pdb
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\ClientLibrary.csproj.AssemblyReference.cache
+C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientLibrary\obj\Debug\net8.0\ClientLibrary.csproj.CopyComplete

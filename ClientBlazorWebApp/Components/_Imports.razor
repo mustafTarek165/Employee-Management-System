@@ -1,0 +1,63 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using ClientLibrary.Services.Contracts
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+@using ClientBlazorWebApp
+@using ClientBlazorWebApp.Components
+@using Components.Layout
+@using BaseLibrary.DTOs
+@using BaseLibrary.Entities
+@using BaseLibrary.Entities.IdentityEntities
+@using ClientLibrary.Helpers
+@using ClientBlazorWebApp.Components.Pages.GeneralComponents
+@using Microsoft.AspNetCore.Components.Authorization
+@using ClientBlazorWebApp.Components.Pages.ContentPages.UserComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.DepartmentComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.GeneralDepartmentComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.BranchComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.EmployeeComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.DoctorComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.VacationComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.SanctionComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.OvertimeComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.OvertimeTypeComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.SanctionTypeComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.VacationTypeComponents
+
+@using ClientBlazorWebApp.Components.Pages.ContentPages.CountryComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.CityComponents
+@using ClientBlazorWebApp.Components.Pages.ContentPages.TownComponents
+@using ApplicationStates
+@inject AuthenticationStateProvider AuthStateProvider
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavManager
+
+@inject IUserAccountService accountService
+
+@inject IGenericServiceInterface<GeneralDepartment> generalDepartmentService
+@inject IGenericServiceInterface<Department> departmentService
+@inject IGenericServiceInterface<Branch> branchService
+
+@inject IGenericServiceInterface<Country> countryService
+@inject IGenericServiceInterface<City> cityService
+@inject IGenericServiceInterface<Town> townService
+
+@inject IGenericServiceInterface<Employee> employeeService
+@inject IGenericServiceInterface<Doctor> doctorService
+
+@inject IGenericServiceInterface<Overtime> overtimeService
+@inject IGenericServiceInterface<OvertimeType> overtimeTypeService
+
+@inject IGenericServiceInterface<Sanction> sanctionService
+@inject IGenericServiceInterface<SanctionType> sanctionTypeService
+
+@inject IGenericServiceInterface<Vacation> vacationService
+@inject IGenericServiceInterface<VacationType> vacationTypeService
+
+
+@inject AllState AllState

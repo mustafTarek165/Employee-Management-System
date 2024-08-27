@@ -1,0 +1,107 @@
+﻿
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h5 class="modal-title" id="exampleModalLabel">@Title City</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close" ></button>
+            </div>
+        
+            <div class="modal-body">
+                
+                <div style="padding: 1rem 0px;">
+                    <div class="card-content">
+                        
+                           
+                                    <EditForm Model="City" Enhance OnValidSubmit="SubmitCardDetails"class="row g-3">
+                                        <DataAnnotationsValidator />
+                                            <AlertComponent  />   
+                                            
+                                                <div class="card-container">
+                                                   <CityInformationComponent Countries="Countries" City1="City"/>
+                                                </div>
+                                                  
+                                        <button type="submit" class="btn btn-primary col-5 ">@Title City</button>
+                                    </EditForm> 
+                                   
+                                             
+                                              
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@code
+{
+    [Parameter]
+    public City City { get; set; } = new();
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    public List<City> Cities { get; set; } = new();
+    public List<Country> Countries { get; set; } = new();
+    [Parameter]
+    public EventCallback<List<City>>OnLoadingNewCities{ get; set; }
+    bool successCheck;
+    string? message;
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetCountries();
+
+
+    }
+    private async Task GetCountries()
+    {
+        Countries = await countryService.GetAll(Constants.CountryBaseUrl);
+    }
+    private async Task GetCities()
+    {
+        Cities = await cityService.GetAll(Constants.CityBaseUrl);
+    }
+    public  async Task SubmitCardDetails()
+    {
+
+        if(City.Id>0)
+        {
+            var result =await  cityService.Update(City, Constants.CityBaseUrl);
+            successCheck =result.Flag;
+          
+            if (successCheck) message = "City Updated Successfully";
+
+            message = result.Message;
+
+            await GetCities();
+            await OnLoadingNewCities.InvokeAsync(Cities);
+        }
+        else
+        {
+            var result =await  cityService.Insert(City, Constants.CityBaseUrl);
+            successCheck = result.Flag;
+            if (successCheck) message = "A new City Added Successfully";
+            message =result.Message;
+            await GetCities();
+            await OnLoadingNewCities.InvokeAsync(Cities);
+
+        }
+
+
+        AllState.TriggerAlert(successCheck,message);
+
+        if((bool)successCheck)
+        {
+
+            City = new();
+            Title = "Add";
+        }
+
+    }
+}

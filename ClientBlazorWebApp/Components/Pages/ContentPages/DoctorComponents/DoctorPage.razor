@@ -1,0 +1,119 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowHealth)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                  
+                    <div class="card-header">
+                        <h4 class="float-start"> Health Information</h4>
+
+                     
+
+                        <DoctorModal   doctor="doctor" Title="@Title" OnLoadingNewDoctors="LoadNewDoctors" ShowHealth="ShowHealth"/>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                      <th scope="col">Employee Id</th>
+                                        <th scope="col">Medical Diagnose </th>
+                                        <th scope="col">Medical Recommendation </th>
+                                        <th scope="col">Date </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(Doctors is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in Doctors)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                                <th>@item.EmployeeId</th>
+                                                <td>@item.MedicalDiagnose</td>
+                                                <td>@item.MedicalRecommendation</td>
+                                                 <td>@item.Date</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No General Doctors added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<Doctor> Doctors { get; set; } = new();
+    public Doctor doctor { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetDoctors();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetDoctors()
+    {
+        Doctors = await doctorService.GetAll(Constants.DoctorBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private bool ShowHealth{get;set;}
+    private void EditClicked(Doctor Doctor)
+    {
+    doctor=Doctor;
+    Title = "Update";
+    ShowHealth = true;
+    }
+    private async Task DeleteClicked(Doctor Doctor)
+    {
+        var response = await doctorService.DeleteById(Doctor.Id, Constants.DoctorBaseUrl);
+        await GetDoctors();
+        AllState.TriggerAlert(true,"Health Deleted Successfully");
+    }
+    void LoadNewDoctors(List<Doctor>_Doctors)
+    {
+        Doctors = _Doctors;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        doctor = new();
+        Title = "Add";
+    }
+}

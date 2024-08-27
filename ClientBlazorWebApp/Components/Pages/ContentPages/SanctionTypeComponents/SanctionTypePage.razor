@@ -1,0 +1,118 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowSanctionType)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                 
+                    <div class="card-header">
+                        <h4 class="float-start"> Sanction TYpe</h4>
+
+                       
+
+                        <div class=" float-end" >
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @onclick="ResetAll">
+                                Add Sanction Type
+                            </button>
+                            
+                        </div>
+
+                        <SanctionTypeModal SanctionType="SanctionType" OnLoadingNewSanctionTypes="LoadNewSanctionTypes" Title="@Title"/>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                      <th scope="col">Sanction Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(SanctionTypes is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in SanctionTypes)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                                <td>@item.Name</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No Sanction Types added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<SanctionType> SanctionTypes { get; set; } = new();
+    public SanctionType SanctionType { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetSanctionTypes();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetSanctionTypes()
+    {
+        SanctionTypes = await sanctionTypeService.GetAll(Constants.SanctionTypeBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private void EditClicked(SanctionType _SanctionType)
+    {
+        SanctionType = _SanctionType;
+        Title = "Update";
+    }
+    private async Task DeleteClicked(SanctionType _SanctionType)
+    {
+        var response = await sanctionTypeService.DeleteById(_SanctionType.Id, Constants.SanctionTypeBaseUrl);
+        await GetSanctionTypes();
+        AllState.TriggerAlert(true,"Sanction Type Deleted Successfully");
+    }
+    void LoadNewSanctionTypes(List<SanctionType>_SanctionTypes)
+    {
+        SanctionTypes = _SanctionTypes;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        SanctionType = new();
+        Title = "Add";
+    }
+}

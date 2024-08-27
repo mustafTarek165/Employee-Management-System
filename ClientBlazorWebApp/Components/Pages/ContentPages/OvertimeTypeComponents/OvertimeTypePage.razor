@@ -1,0 +1,118 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowOvertimeType)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    
+                    <div class="card-header">
+                        <h4 class="float-start"> Overtime </h4>
+
+                       
+
+                        <div class=" float-end" >
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @onclick="ResetAll">
+                                Add Overtime Type
+                            </button>
+                            
+                        </div>
+
+                        <OvertimeTypeModal OvertimeType="OvertimeType" OnLoadingNewOvertimeTypes="LoadNewOvertimeTypes" Title="@Title"/>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                      <th scope="col">Overtime Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(OvertimeTypes is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in OvertimeTypes)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                                <td>@item.Name</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No Overtime Types added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<OvertimeType> OvertimeTypes { get; set; } = new();
+    public OvertimeType OvertimeType { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetOvertimeTypes();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetOvertimeTypes()
+    {
+        OvertimeTypes = await overtimeTypeService.GetAll(Constants.OvertimeTypeBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private void EditClicked(OvertimeType _OvertimeType)
+    {
+        OvertimeType = _OvertimeType;
+        Title = "Update";
+    }
+    private async Task DeleteClicked(OvertimeType _OvertimeType)
+    {
+        var response = await overtimeTypeService.DeleteById(_OvertimeType.Id, Constants.OvertimeTypeBaseUrl);
+        await GetOvertimeTypes();
+        AllState.TriggerAlert(true,"Overtime Type Deleted Successfully");
+    }
+    void LoadNewOvertimeTypes(List<OvertimeType>_OvertimeTypes)
+    {
+        OvertimeTypes = _OvertimeTypes;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        OvertimeType = new();
+        Title = "Add";
+    }
+}

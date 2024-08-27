@@ -1,0 +1,20 @@
+﻿
+<div>
+    <label for="Fn" class="form-label"> Sanction Type</label>
+    <InputText id="Fn" @bind-Value="SanctionType!.Name" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => SanctionType!.Name)" class="field-validation-error" />
+    </div>
+
+</div>
+
+
+
+@code {
+    
+    [Parameter]
+    public SanctionType? SanctionType { get; set; } = new();
+
+    
+
+}

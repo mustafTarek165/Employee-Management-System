@@ -1,0 +1,87 @@
+﻿@page "/identity/account/register"
+@layout AuthenticationLayout
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+
+        <div class="col-lg-4">
+             <EditForm Enhance Model="User" OnValidSubmit="@HandleRegister" >
+                <DataAnnotationsValidator/> 
+             
+                <div class="card bg-dark d-flex justify-content-center" style="opacity:0.9;margin-top:30%;border-radius:10px;color:white;font-weight:bold">
+                    <div class="card-header text-center fs-5"> Register an account</div>
+                    <div class="card-body">
+                        <div class="form-group mt-3">
+                           <label class="form-label">Full Name</label>
+                           <InputText @bind-Value="@User.FullName" class="form-control"></InputText>
+                        </div>
+                        <div class="form-group mt-3">
+                           <label class="form-label">Email</label>
+                           <InputText @bind-Value="@User.Email" class="form-control"></InputText>
+                        </div>
+                        <div class="form-group mt-3">
+                           <label class="form-label">Password</label>
+                           <InputText type="password" @bind-Value="User.Password" class="form-control"></InputText>
+                        </div>
+                        <div class="form-group mt-3">
+                           <label class="form-label">Confirm Password</label>
+                           <InputText type="password" @bind-Value="User.ConfirmPassword" class="form-control"></InputText>
+                        </div>
+
+               
+                        <div class="form-group mt-3">
+                            @if(ShowLoadingButton)
+                            {
+                                <ButtonLoadingSpinner/>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary float-end" type="submit" >Register</button>
+                            }
+                        </div>
+                    </div>
+                     <div class="card-footer">
+                        <span class="text-center">
+                            Have account already? | 
+                            <a class="btn-link" href="identity/account/login"> Sign In</a>
+                        </span>
+                        <ValidationSummary/>
+                    </div>
+                </div>
+
+            </EditForm>
+        </div>
+        <div class="col-lg-4">
+           
+        </div>
+    </div>
+</div>
+@code
+{
+    public bool ShowLoadingButton { get; set; } = false;
+    Register User  = new();
+
+  
+    protected async override Task OnInitializedAsync()
+    {
+            var authState = await AuthenticationStateProvider
+          .GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity is not null && user.Identity!.IsAuthenticated)   NavManager.NavigateTo("/home/dashboard");
+    }
+    async Task HandleRegister()
+    {
+        ShowLoadingButton = true;
+        var result = await accountService.CreateAsync(User);
+        if(result.Flag)
+        {
+            User = new();
+        }
+        else
+        {
+            
+        }
+         ShowLoadingButton = false;
+    }
+}

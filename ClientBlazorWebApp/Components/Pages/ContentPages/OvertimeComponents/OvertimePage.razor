@@ -1,0 +1,127 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowOvertime)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                   
+                    <div class="card-header">
+                        <h4 class="float-start"> Overtime</h4>
+
+                    
+                        <OvertimeModal Overtime="Overtime" OnLoadingNewOvertimes="LoadNewOvertimes" Title="@Title" OvertimeCheck="OvertimeCheck"/>
+                 
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                     
+                                        <th scope="col">Employee Id </th>
+                                        <th scope="col">Overtime Type</th>
+                                         <th scope="col">Start Date</th>
+
+                                          <th scope="col">End Date</th>
+
+                                           <th scope="col">Number Of Days</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(Overtimes is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in Overtimes)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                             
+                                                <td>@item.EmployeeId</td>
+                                                <td>@item.OvertimeType.Name</td>
+                                                
+                                                <td>@item.StartDate</td>
+                                                <td>@item.EndDate</td>
+                                                <td>@item.NumOfDays</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No General Overtimes added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<Overtime> Overtimes { get; set; } = new();
+    public Overtime Overtime { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetOvertimes();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetOvertimes()
+    {
+        Overtimes = await overtimeService.GetAll(Constants.OvertimeBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private bool OvertimeCheck{ get; set; }
+    private void EditClicked(Overtime overtime)
+    {
+        Overtime=overtime;
+        Title = "Update";
+        OvertimeCheck = true;
+    }
+    private async Task DeleteClicked(Overtime Overtime)
+    {
+        var response = await overtimeService.DeleteById(Overtime.Id, Constants.OvertimeBaseUrl);
+        await GetOvertimes();
+        AllState.TriggerAlert(true,"Overtime Deleted Successfully");
+    }
+    void LoadNewOvertimes(List<Overtime>overtimes)
+    {
+        Overtimes = overtimes;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        Overtime = new();
+        Title = "Add";
+    }
+}

@@ -1,0 +1,19 @@
+﻿
+
+<div>
+    <label for="Fn" class="form-label">Country Name</label>
+    <InputText id="Fn" @bind-Value="Country!.Name" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => Country!.Name)" class="field-validation-error" />
+    </div>
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public Country Country { get; set; }
+
+
+}

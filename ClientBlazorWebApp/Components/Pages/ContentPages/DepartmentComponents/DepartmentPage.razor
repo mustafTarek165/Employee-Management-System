@@ -1,0 +1,122 @@
+﻿
+@implements IDisposable
+@if(AllState.ShowDepartment)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                   
+                    <div class="card-header">
+                        <h4 class="float-start"> Department</h4>
+
+                       
+
+                        <div class=" float-end" >
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @onclick="ResetAll">
+                                Add New Department
+                            </button>
+                            
+                        </div>
+                        <DepartmentModal department="department" OnLoadingNewDepartments="LoadNewDepartments" Title="@Title"/>
+                 
+                    </div>
+                    <div class="card-header">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                     
+                                        <th scope="col">General Department </th>
+                                        <th scope="col">Department </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if(Departments is not null)
+                                    {
+
+                                        int count = 1;
+                                        foreach(var item in Departments)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                             
+                                                <td>@item.generalDepartment?.Name</td>
+                                                <td>@item.Name</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
+
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                     <tr>
+                                         <td colspan="4">
+                                             <div class="alert alert-info text-center">
+                                                 No General Departments added yet!
+                                             </div>
+                                         </td>
+                                     </tr>   
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+
+    public List<Department> Departments { get; set; } = new();
+    public Department department { get; set; } = new();
+    public string Title { get; set; } = "Add";
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetDepartments();
+
+        AllState.Action += StateHasChanged;
+    }
+    private async Task GetDepartments()
+    {
+        Departments = await departmentService.GetAll(Constants.DepartmentBaseUrl);
+    }
+    public void Dispose()
+    {
+        AllState.Action -= StateHasChanged;
+    }
+    private void EditClicked(Department Department)
+    {
+        department=Department;
+        Title = "Update";
+    }
+    private async Task DeleteClicked(Department Department)
+    {
+        var response = await departmentService.DeleteById(Department.Id, Constants.DepartmentBaseUrl);
+        await GetDepartments();
+        AllState.TriggerAlert(true,"Department Deleted Successfully");
+    }
+    void LoadNewDepartments(List<Department>departments)
+    {
+        Departments = departments;
+    }
+    private void ResetAll()
+    {
+        // Close the alert by rerendring with null
+        AllState.TriggerAlert(null, "");
+        department = new();
+        Title = "Add";
+    }
+}

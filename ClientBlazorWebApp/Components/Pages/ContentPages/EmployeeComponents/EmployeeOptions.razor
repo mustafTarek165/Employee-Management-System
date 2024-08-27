@@ -1,0 +1,158 @@
+﻿@using Microsoft.JSInterop
+<EmployeeDetailsPage ShowDetailsPage="ShowDetails" EmployeeDetails="employee"  CloseEmployeeDetails="HideDetails"/>
+<AddOrUpdateEmployee ShowAddOrUpdateEmployee="showAddOrUpdateEmployee" Employee="employee" NotifyParentFormCloseClicked="RevertBack"/>
+
+    <DoctorModal doctor="doctor" Title="@Title"  ShowHealth="showHealthDetails" />
+    <OvertimeModal  Overtime="overtime" OvertimeCheck="showOvertimeDetails" Title="@Title"/>
+    <VacationModal Vacation="vacation" VacationCheck="showVacationDetails" Title="@Title"/>
+    <SanctionModal Sanction="sanction" SanctionCheck="showSanctionDetails" Title="@Title"/>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h5 class="modal-title" id="exampleModalLabel">Employee Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close" ></button>
+            </div>
+        
+            <div class="modal-body">
+                
+                <div style="padding: 1rem 0px;">
+                    <div class="card-content">
+                        
+                           <div class="hstack gap-2 mb-2" id="cursorStyle" @onclick="ViewClicked" >
+                               <i class="bi bi-eye text-info"></i>
+                               <span id="cursorStyle" class="text-info"> View</span>
+                           </div>
+                            <div class="hstack gap-2 mb-2" id="cursorStyle" @onclick="EditClicked">
+                               <i class="bi bi-pencil text-primary"></i>
+                               <span id="cursorStyle" class="text-primary"> Edit</span>
+                           </div>
+
+                            <div class="hstack gap-2 mb-2" id="cursorStyle" @onclick="DeleteClicked">
+                               <i class="bi bi-trash text-danger"></i>
+                               <span id="cursorStyle" class="text-danger"> Delete</span>
+                           </div>
+                            <div class="hstack gap-2 mb-2" id="cursorStyle" @onclick="AddVacationClicked">
+                               <i class="bi bi-backpack3 text-success"></i>
+                               <span id="cursorStyle" class="text-success"> Add Vacation</span>
+                           </div> 
+                            <div class="hstack gap-2 mb-2" id="cursorStyle" @onclick="AddOvertimeClicked">
+                               <i class="bi bi-stopwatch text-danger"></i>
+                               <span id="cursorStyle" class="text-danger"> Add Overtime</span>
+                           </div>
+                            <div class="hstack gap-2 mb-2" id="cursorStyle" @onclick="AddHealthClicked">
+                               <i class="bi bi-hospital text-warning"></i>
+                               <span id="cursorStyle" class="text-warning"> Add Health</span>
+                           </div>
+
+                           <div class="hstack gap-2 mb-2" id="cursorStyle" @onclick="AddSanctionClicked">
+                               <i class="bi bi-x-octagon text-info"></i>
+                               <span id="cursorStyle" class="text-info"> Add Sanction</span>
+                           </div>
+                                
+                                                                                          
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function closeModal(modalId) {
+        var modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
+        modal.hide();
+    }
+</script>
+@code {
+    [Inject] private IJSRuntime JSRuntime { get; set; }
+
+    [Parameter] public Employee employee { get; set; } = new();
+    public List<Employee> employees{ get; set; }
+    [Parameter]
+    public EventCallback<List<Employee>>OnLoadingNewEmployees{ get; set; }
+    bool ShowDetails{ get; set; }
+    bool showAddOrUpdateEmployee{ get; set; }
+
+    string Title { set; get; } = "Add";
+    private async Task GetEmployees()
+    {
+        employees = await employeeService.GetAll(Constants.EmployeeBaseUrl);
+    }
+    async Task ViewClicked()
+    {
+        await JSRuntime.InvokeVoidAsync("closeModal", "exampleModal");
+        ShowDetails = true;
+
+    }
+    void HideDetails()
+    {
+        ShowDetails = false;
+    }
+    async Task EditClicked()
+    {
+        await JSRuntime.InvokeVoidAsync("closeModal", "exampleModal");
+        showAddOrUpdateEmployee = true;
+    }
+    async Task RevertBack(List<Employee>_employees)
+    {
+
+        showAddOrUpdateEmployee = false;
+        await OnLoadingNewEmployees.InvokeAsync(_employees);
+    }
+    private async Task DeleteClicked()
+    {
+        var response = await employeeService.DeleteById(employee.Id, Constants.EmployeeBaseUrl);
+        await GetEmployees();
+        AllState.TriggerAlert(true,"Employee Deleted Successfully");
+        await OnLoadingNewEmployees.InvokeAsync(employees);
+    }
+    Doctor doctor { get; set; } = new();
+    bool showHealthDetails{ get; set; }
+    async Task AddHealthClicked()
+    {
+        //here
+        await JSRuntime.InvokeVoidAsync("closeModal", "exampleModal");
+        showHealthDetails = true;
+        doctor.EmployeeId = employee.Id;
+       
+
+    }
+    Overtime overtime { get; set; } = new();
+    bool showOvertimeDetails{ get; set; }
+    async Task AddOvertimeClicked()
+    {
+        //here
+        await JSRuntime.InvokeVoidAsync("closeModal", "exampleModal");
+        showOvertimeDetails = true;
+        overtime.EmployeeId = employee.Id;
+    }
+
+    Vacation vacation { get; set; } = new();
+    bool showVacationDetails{ get; set; }
+    async Task AddVacationClicked()
+    {
+        //here
+        await JSRuntime.InvokeVoidAsync("closeModal", "exampleModal");
+        showVacationDetails = true;
+        vacation.EmployeeId = employee.Id;
+    }
+    Sanction sanction { get; set; } = new();
+    bool showSanctionDetails{ get; set; }
+    async Task AddSanctionClicked()
+    {
+        //here
+        await JSRuntime.InvokeVoidAsync("closeModal", "exampleModal");
+        showSanctionDetails = true;
+        sanction.EmployeeId = employee.Id;
+    }
+ 
+
+}

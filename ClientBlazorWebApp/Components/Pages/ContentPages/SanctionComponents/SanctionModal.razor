@@ -1,0 +1,97 @@
+﻿@if(SanctionCheck)
+{
+  <div class="container" style="margin-top:20px">
+<div class="row">
+    <div class="col-lg-12">
+         <div class="container-fluid">
+                        
+                           
+                                    <EditForm Model="Sanction" Enhance OnValidSubmit="SubmitCardDetails"class="row g-3">
+                                        <DataAnnotationsValidator />
+                                            <AlertComponent  />   
+                                            
+                                                <div class="card-container">
+                                                   <SanctionInformationComponent SanctionTypes="SanctionTypes" Sanction1="Sanction"/>
+                                                </div>
+                                                  
+                                        <button type="submit" class="btn btn-primary col-5 ">@Title Sanction</button>
+                                    </EditForm> 
+                                   
+                                             
+                                         
+            </div>
+
+        </div>
+    </div>
+</div>    
+}
+
+@code
+{
+    [Parameter]
+    public Sanction Sanction { get; set; } = new();
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    public List<Sanction> Sanctions { get; set; } = new();
+    public List<SanctionType> SanctionTypes { get; set; } = new();
+    [Parameter]
+    public EventCallback<List<Sanction>>OnLoadingNewSanctions{ get; set; }
+
+        [Parameter]
+    public bool SanctionCheck{ get; set; }
+    bool successCheck;
+    string? message;
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await GetSanctionTypes();
+    }
+    private async Task GetSanctionTypes()
+    {
+        SanctionTypes = await sanctionTypeService.GetAll(Constants.SanctionTypeBaseUrl);
+    }
+    private async Task GetSanctions()
+    {
+        Sanctions = await sanctionService.GetAll(Constants.SanctionBaseUrl);
+    }
+    public  async Task SubmitCardDetails()
+    {
+
+        if(Sanction.Id>0)
+        {
+            var result =await  sanctionService.Update(Sanction, Constants.SanctionBaseUrl);
+            successCheck =result.Flag;
+          
+            if (successCheck) message = "Sanction Updated Successfully";
+
+            message = result.Message;
+
+            await GetSanctions();
+            await OnLoadingNewSanctions.InvokeAsync(Sanctions);
+        }
+        else
+        {
+            var result =await  sanctionService.Insert(Sanction, Constants.SanctionBaseUrl);
+            successCheck = result.Flag;
+            if (successCheck) message = "A new Sanction Added Successfully";
+            message =result.Message;
+            await GetSanctions();
+            await OnLoadingNewSanctions.InvokeAsync(Sanctions);
+
+        }
+
+
+        AllState.TriggerAlert(successCheck,message);
+
+        if((bool)successCheck)
+        {
+
+            Sanction = new();
+            Title = "Add";
+        }
+
+    }
+}

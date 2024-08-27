@@ -1,0 +1,92 @@
+﻿
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h5 class="modal-title" id="exampleModalLabel">@Title Vacation Type</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close" ></button>
+            </div>
+        
+            <div class="modal-body">
+               
+                <div style="padding: 1rem 0px;">
+                    <div class="card-content">
+                        
+                           
+                                    <EditForm Model="VacationType" Enhance OnValidSubmit="SubmitCardDetails"class="row g-3">
+                                        <DataAnnotationsValidator />
+                                            <AlertComponent  />   
+                                            
+                                                <div class="card-container">
+                                                     <VacationTypeInformationComponent   vacationType="VacationType"/>
+                                                </div>
+                                                  
+                                        <button type="submit" class="btn btn-primary col-5 ">@Title Vacation Type</button>
+                                    </EditForm>
+                                   
+                                             
+                                              
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@code
+{
+    [Parameter]
+    public VacationType VacationType { get; set; } = new();
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+    [Parameter]
+    public EventCallback<List<VacationType>>OnLoadingNewVacationTypes{ get; set; }
+
+        public List<VacationType> VacationTypes { get; set; } = new();
+    bool successCheck;
+    string? message;
+     private async Task GetVacationTypes()
+    {
+        VacationTypes = await vacationTypeService.GetAll(Constants.VacationTypeBaseUrl);
+    }
+    public  async Task SubmitCardDetails()
+    {
+
+
+        if(VacationType.Id>0)
+        {
+            var result =await  vacationTypeService.Update(VacationType, Constants.VacationTypeBaseUrl);
+            successCheck =result.Flag;
+
+            if (successCheck) message = "Overtime Type Updated Successfully";
+
+            message = result.Message;
+            await GetVacationTypes();
+            await OnLoadingNewVacationTypes.InvokeAsync(VacationTypes);
+        }
+        else
+        {
+            var result =await  vacationTypeService.Insert(VacationType, Constants.VacationTypeBaseUrl);
+            successCheck = result.Flag;
+            if (successCheck) message = "Overtime Type Added Successfully";
+            message =result.Message;
+            await GetVacationTypes();
+            await OnLoadingNewVacationTypes.InvokeAsync(VacationTypes);
+        }
+
+        AllState.TriggerAlert(successCheck,message);
+
+
+        if((bool)successCheck)
+        {
+
+            VacationType = new();
+          
+        }
+
+    }
+}

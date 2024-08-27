@@ -1,0 +1,42 @@
+﻿
+<div>
+    <label for="Fn" class="form-label">Branch Name</label>
+    <InputText id="Fn" @bind-Value="branch!.Name" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => branch!.Name)" class="field-validation-error" />
+    </div>
+
+    <div class="form-group">
+         <label for="departmentSelect">Department:</label>
+         <select id="departmentSelect" class="form-control" @bind="branch.DepartmentId" style="width: auto;" @onclick="SelectValue">
+             <option value="">Select a department</option>
+             @if(Departments is not null)
+                 {
+                      @foreach (var department in Departments)
+             {
+                 <option value="@department.Id">@department.Name</option>
+             }
+                 }
+                
+         </select>
+    </div>
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public List<Department> Departments { get; set; } = new();
+
+    [Parameter]
+    public Branch branch { get; set; } = new();
+
+    [Parameter] public EventCallback<int>OnSelection{ get; set; }
+    async Task SelectValue()
+    {
+        if(branch.DepartmentId>0)
+       await OnSelection.InvokeAsync(branch.DepartmentId);
+    }
+
+}

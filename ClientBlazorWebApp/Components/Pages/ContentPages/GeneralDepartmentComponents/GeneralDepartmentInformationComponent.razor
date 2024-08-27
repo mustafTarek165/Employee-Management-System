@@ -1,0 +1,18 @@
+﻿
+
+<div>
+    <label for="Fn" class="form-label">Department Name</label>
+    <InputText id="Fn" @bind-Value="generalDepartment!.Name" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => generalDepartment!.Name)" class="field-validation-error" />
+    </div>
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public GeneralDepartment? generalDepartment { get; set; }
+
+}

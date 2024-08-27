@@ -1,0 +1,267 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ClientBlazorWebApp
+build_property.RootNamespace = ClientBlazorWebApp
+build_property.ProjectDir = C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientBlazorWebApp\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Mustafa Tarek\source\repos\EmployeeManagementSystem\ClientBlazorWebApp
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Layout/AuthenticationLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQXV0aGVudGljYXRpb25MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/AccountPages/LoginPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBY2NvdW50UGFnZXNcTG9naW5QYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/AccountPages/RegisterPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBY2NvdW50UGFnZXNcUmVnaXN0ZXJQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/AuthenticationPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRoZW50aWNhdGlvblBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/BranchComponents/BranchInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcQnJhbmNoQ29tcG9uZW50c1xCcmFuY2hJbmZvcm1hdGlvbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/BranchComponents/BranchModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcQnJhbmNoQ29tcG9uZW50c1xCcmFuY2hNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/BranchComponents/BranchPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcQnJhbmNoQ29tcG9uZW50c1xCcmFuY2hQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/CityComponents/CityInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcQ2l0eUNvbXBvbmVudHNcQ2l0eUluZm9ybWF0aW9uQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/CityComponents/CityModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcQ2l0eUNvbXBvbmVudHNcQ2l0eU1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/CityComponents/CityPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcQ2l0eUNvbXBvbmVudHNcQ2l0eVBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/CountryComponents/CountryInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcQ291bnRyeUNvbXBvbmVudHNcQ291bnRyeUluZm9ybWF0aW9uQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/CountryComponents/CountryModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcQ291bnRyeUNvbXBvbmVudHNcQ291bnRyeU1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/CountryComponents/CountryPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcQ291bnRyeUNvbXBvbmVudHNcQ291bnRyeVBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/DepartmentComponents/DepartmentInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRGVwYXJ0bWVudENvbXBvbmVudHNcRGVwYXJ0bWVudEluZm9ybWF0aW9uQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/DepartmentComponents/DepartmentModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRGVwYXJ0bWVudENvbXBvbmVudHNcRGVwYXJ0bWVudE1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/DepartmentComponents/DepartmentPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRGVwYXJ0bWVudENvbXBvbmVudHNcRGVwYXJ0bWVudFBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/DoctorComponents/DoctorInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRG9jdG9yQ29tcG9uZW50c1xEb2N0b3JJbmZvcm1hdGlvbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/DoctorComponents/DoctorModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRG9jdG9yQ29tcG9uZW50c1xEb2N0b3JNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/DoctorComponents/DoctorPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRG9jdG9yQ29tcG9uZW50c1xEb2N0b3JQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/EmployeeComponents/AddOrUpdateEmployee.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRW1wbG95ZWVDb21wb25lbnRzXEFkZE9yVXBkYXRlRW1wbG95ZWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/EmployeeComponents/EmployeeDetailsPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRW1wbG95ZWVDb21wb25lbnRzXEVtcGxveWVlRGV0YWlsc1BhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/EmployeeComponents/EmployeeOptions.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRW1wbG95ZWVDb21wb25lbnRzXEVtcGxveWVlT3B0aW9ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/EmployeeComponents/EmployeePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcRW1wbG95ZWVDb21wb25lbnRzXEVtcGxveWVlUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/GeneralDepartmentComponents/GeneralDepartmentInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcR2VuZXJhbERlcGFydG1lbnRDb21wb25lbnRzXEdlbmVyYWxEZXBhcnRtZW50SW5mb3JtYXRpb25Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/GeneralDepartmentComponents/GeneralDepartmentModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcR2VuZXJhbERlcGFydG1lbnRDb21wb25lbnRzXEdlbmVyYWxEZXBhcnRtZW50TW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/GeneralDepartmentComponents/GeneralDepartmentPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcR2VuZXJhbERlcGFydG1lbnRDb21wb25lbnRzXEdlbmVyYWxEZXBhcnRtZW50UGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/HomePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcSG9tZVBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/OvertimeComponents/OvertimeInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcT3ZlcnRpbWVDb21wb25lbnRzXE92ZXJ0aW1lSW5mb3JtYXRpb25Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/OvertimeComponents/OvertimeModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcT3ZlcnRpbWVDb21wb25lbnRzXE92ZXJ0aW1lTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/OvertimeComponents/OvertimePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcT3ZlcnRpbWVDb21wb25lbnRzXE92ZXJ0aW1lUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/OvertimeTypeComponents/OvertimeTypeInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcT3ZlcnRpbWVUeXBlQ29tcG9uZW50c1xPdmVydGltZVR5cGVJbmZvcm1hdGlvbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/OvertimeTypeComponents/OvertimeTypeModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcT3ZlcnRpbWVUeXBlQ29tcG9uZW50c1xPdmVydGltZVR5cGVNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/OvertimeTypeComponents/OvertimeTypePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcT3ZlcnRpbWVUeXBlQ29tcG9uZW50c1xPdmVydGltZVR5cGVQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/SanctionComponents/SanctionInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcU2FuY3Rpb25Db21wb25lbnRzXFNhbmN0aW9uSW5mb3JtYXRpb25Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/SanctionComponents/SanctionModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcU2FuY3Rpb25Db21wb25lbnRzXFNhbmN0aW9uTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/SanctionComponents/SanctionPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcU2FuY3Rpb25Db21wb25lbnRzXFNhbmN0aW9uUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/SanctionTypeComponents/SanctionTypeInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcU2FuY3Rpb25UeXBlQ29tcG9uZW50c1xTYW5jdGlvblR5cGVJbmZvcm1hdGlvbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/SanctionTypeComponents/SanctionTypeModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcU2FuY3Rpb25UeXBlQ29tcG9uZW50c1xTYW5jdGlvblR5cGVNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/SanctionTypeComponents/SanctionTypePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcU2FuY3Rpb25UeXBlQ29tcG9uZW50c1xTYW5jdGlvblR5cGVQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/TownComponents/TownInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVG93bkNvbXBvbmVudHNcVG93bkluZm9ybWF0aW9uQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/TownComponents/TownModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVG93bkNvbXBvbmVudHNcVG93bk1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/TownComponents/TownPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVG93bkNvbXBvbmVudHNcVG93blBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/UserComponents/UserInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVXNlckNvbXBvbmVudHNcVXNlckluZm9ybWF0aW9uQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/UserComponents/UserModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVXNlckNvbXBvbmVudHNcVXNlck1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/UserComponents/UserPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVXNlckNvbXBvbmVudHNcVXNlclBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/VacationComponents/VacationInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVmFjYXRpb25Db21wb25lbnRzXFZhY2F0aW9uSW5mb3JtYXRpb25Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/VacationComponents/VacationModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVmFjYXRpb25Db21wb25lbnRzXFZhY2F0aW9uTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/VacationComponents/VacationPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVmFjYXRpb25Db21wb25lbnRzXFZhY2F0aW9uUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/VacationTypeComponents/VacationTypeInformationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVmFjYXRpb25UeXBlQ29tcG9uZW50c1xWYWNhdGlvblR5cGVJbmZvcm1hdGlvbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/VacationTypeComponents/VacationTypeModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVmFjYXRpb25UeXBlQ29tcG9uZW50c1xWYWNhdGlvblR5cGVNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/ContentPages/VacationTypeComponents/VacationTypePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250ZW50UGFnZXNcVmFjYXRpb25UeXBlQ29tcG9uZW50c1xWYWNhdGlvblR5cGVQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/GeneralComponents/AlertComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZW5lcmFsQ29tcG9uZW50c1xBbGVydENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/GeneralComponents/ButtonLoadingSpinner.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZW5lcmFsQ29tcG9uZW50c1xCdXR0b25Mb2FkaW5nU3Bpbm5lci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/GeneralComponents/DropDownList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZW5lcmFsQ29tcG9uZW50c1xEcm9wRG93bkxpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/GeneralComponents/ProfileDropDown.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZW5lcmFsQ29tcG9uZW50c1xQcm9maWxlRHJvcERvd24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Pages/GeneralComponents/TableBanner.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZW5lcmFsQ29tcG9uZW50c1xUYWJsZUJhbm5lci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-m652pcxscs
+
+[C:/Users/Mustafa Tarek/source/repos/EmployeeManagementSystem/ClientBlazorWebApp/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-12by1yiex6

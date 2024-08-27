@@ -1,0 +1,38 @@
+﻿
+<div>
+    <label for="Fn" class="form-label">Department Name</label>
+    <InputText id="Fn" @bind-Value="department1!.Name" class="form-control" />
+    <div class="cus-error" style="color:red">
+        <ValidationMessage For="@(() => department1!.Name)" class="field-validation-error" />
+    </div>
+
+    <div class="form-group">
+         <label for="departmentSelect">Department:</label>
+         <select id="departmentSelect" class="form-control" @bind="department1.GeneralDepartmentId" style="width: auto;" >
+             <option value="">Select a department</option>
+             @if(generalDepartments is not null)
+                 {
+                      @foreach (var department in generalDepartments)
+             {
+                 <option value="@department.Id">@department.Name</option>
+             }
+                 }
+                
+         </select>
+    </div>
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public List<GeneralDepartment> generalDepartments { get; set; } = new();
+
+    [Parameter]
+    public Department department1 { get; set; } = new();
+
+
+  
+
+}
